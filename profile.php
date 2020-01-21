@@ -43,19 +43,19 @@ if (isset($_SESSION["name"]) and isset($_SESSION["password"])) {
             }
         }
         if (empty($_POST["mob"])) {
-            $emailErr = "Please enter your mobile";
+            $mobErr = "Please enter your mobile";
         } else {
             $mob = test_input($_POST["mob"]);
             if ((is_numeric($mob) and strlen($mob) == 10)) {
             } else {
-                $emailErr = "Please enter valid mobile number";
+                $mobErr = "Please enter valid mobile number";
             }
         }
         if (empty($_POST["age"])) {
             $ageErr = "Please enter your age";
         } else {
             $age = test_input($_POST["age"]);
-            if ($age < 20 and $age > 30) {
+            if ($age < 20 or $age > 30) {
                 $ageErr = "Valid age is between 20-30";
             }
         }
@@ -69,8 +69,8 @@ if (isset($_SESSION["name"]) and isset($_SESSION["password"])) {
         } else {
             $state = test_input($_POST["state"]);
         }
-        if (empty($_POST["skill"])) {
-            $skillErr = "Please select at least one skill";
+        if (count($_POST["skill"]) < 2) {
+            $skillErr = "Please select at least two skill";
         } else {
             foreach ($_POST['skill'] as $skills) {
                 $skill[] = test_input($skills);
@@ -112,10 +112,10 @@ if (isset($_SESSION["name"]) and isset($_SESSION["password"])) {
         <span class="error">* <?php echo $emailErr; ?></span>
         <br /><br />
         Mobile no:<input type="text" name="mob" value="<?php echo $mob; ?>" pattern="[1-9]{1}[0-9]{9}" maxlength="10">
-        <span class="error">* <?php echo $emailErr; ?></span>
+        <span class="error">* <?php echo $mobErr; ?></span>
         <br /><br />
         Age:<input type="text" name="age" value="<?php echo $mob; ?>">
-        <span class="error">* <?php echo $emailErr; ?></span>
+        <span class="error">* <?php echo $ageErr; ?></span>
         <br /><br />
         Gender:
         <input type="radio" name="gender" <?php if (isset($gender) && $gender == "female") echo "checked"; ?> value="female">Female
@@ -149,26 +149,46 @@ if (isset($_SESSION["name"]) and isset($_SESSION["password"])) {
         <br /><br />
         <input type="submit" name="submit" value="Submit">
     </form>
-    <?php
-    echo "<h2>Your Input:</h2>";
-    echo $name;
-    echo "<br />";
-    echo $email;
-    echo "<br />";
-    echo $mob;
-    echo "<br />";
-    echo $age;
-    echo "<br />";
-    echo $gender;
-    echo "<br />";
-    echo $state;
-    echo "<br />";
-    echo implode(',', $skill);
-    echo "<br />";
-    echo $photoName;
-    echo $resumeName;
-    echo empty($_FILES['resume']);
-    ?>
+    <div>
+        <?php
+        if ($_POST['submit'] != "") {
+
+            if ($nameErr == "") {
+                echo "<p>Name: " . $name . "</p>";
+            }
+            if ($emailErr == "") {
+                echo "<p>Email: " . $email . "</p>";
+            }
+            if ($mobErr == "") {
+                echo "<p>Mobile no: " . $mob . "</p>";
+            }
+            if ($ageErr == "") {
+                echo "<p>Age: " . $age . "</p>";
+            }
+            if ($genderErr == "") {
+                echo "<p>Gender: " . $gender . "</p>";
+            }
+            if ($stateErr == "") {
+                echo "<p>State: " . $state . "</p>";
+            }
+            if ($skillErr == "") {
+                echo "<p>Skills:" . implode(', ', $skill) . "</p>";
+            }
+            if ($profilePhotoErr == '') {
+                foreach ($_FILES["profilePhoto"] as $k => $v) {
+                    echo $k . "=>" . $v . '<br />';
+                }
+            }
+            if ($resumeErr == '') {
+                foreach ($_FILES["resume"] as $k => $v) {
+                    echo $k . "=>" . $v . '<br />';
+                }
+            }
+        }
+        ?>
+
+
+    </div>
 </body>
 
 </html>
