@@ -11,11 +11,13 @@ if (isset($_SESSION["name"]) and isset($_SESSION["password"])) {
 <html>
 
 <head>
-    <style>
-        .error {
-            color: #FF0000;
-        }
-    </style>
+    <meta name='author' content='Deeptiranjan'>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile Page</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="profile_style.css?v=1">
 </head>
 
 <body>
@@ -103,53 +105,95 @@ if (isset($_SESSION["name"]) and isset($_SESSION["password"])) {
         return $data;
     }
     ?>
-    <p><span class="error">* required field</span></p>
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype='multipart/form-data'>
-        Name: <input type="text" name="name" value="<?php echo $name; ?>">
-        <span class="error">* <?php echo $nameErr; ?></span>
-        <br /><br />
-        E-mail: <input type="email" name="email" value="<?php echo $email; ?>">
-        <span class="error">* <?php echo $emailErr; ?></span>
-        <br /><br />
-        Mobile no:<input type="text" name="mob" value="<?php echo $mob; ?>" pattern="[1-9]{1}[0-9]{9}" maxlength="10">
-        <span class="error">* <?php echo $mobErr; ?></span>
-        <br /><br />
-        Age:<input type="text" name="age" value="<?php echo $mob; ?>">
-        <span class="error">* <?php echo $ageErr; ?></span>
-        <br /><br />
-        Gender:
-        <input type="radio" name="gender" <?php if (isset($gender) && $gender == "female") echo "checked"; ?> value="female">Female
-        <input type="radio" name="gender" <?php if (isset($gender) && $gender == "male") echo "checked"; ?> value="male">Male
-        <input type="radio" name="gender" <?php if (isset($gender) && $gender == "other") echo "checked"; ?> value="other">Other
-        <span class="error">* <?php echo $genderErr; ?></span>
-        <br /><br />
+    <?php require_once('navbar.php'); ?>
+    <div class="container-fluid main-content">
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype='multipart/form-data'>
+            <div class='form-group'>
+                <label for="name">Name:</label>
+                <input type="text" name="name" class="form-control" value="<?php echo $name; ?>">
+                <span class="error"><?php echo $nameErr; ?></span>
+            </div>
+            <div class='form-group'>
+                <label for="email">E-mail:</label>
+                <input type="email" name="email" class="form-control" value="<?php echo $email; ?>">
+                <span class="error"><?php echo $emailErr; ?></span>
+            </div>
+            <div class='form-group'>
+                <label for="mobile no">Mobile no:</label>
+                <input type="text" name="mob" class="form-control" value="<?php echo $mob; ?>" pattern="[1-9]{1}[0-9]{9}" maxlength="10">
+                <span class="error"><?php echo $mobErr; ?></span>
+            </div>
+            <div class='form-group'>
+                <label for="age">Age:</label>
+                <input type="text" name="age" class="form-control" value="<?php echo $age; ?>">
+                <span class="error"><?php echo $ageErr; ?></span>
+            </div>
+            <div class='custom-control-inline'>
+                <label for="gender">Gender:</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="female" name="gender" <?php if (isset($gender) && $gender == "female") echo "checked"; ?>value="female">
+                <label class="custom-control-label" for="female">Female</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="male" name="gender" <?php if (isset($gender) && $gender == "male") echo "checked"; ?>value="male">
+                <label class="custom-control-label" for="male">Male</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="others" name="gender" <?php if (isset($gender) && $gender == "other") echo "checked"; ?> value="others">
+                <label class="custom-control-label" for="others">Others</label>
+            </div>
+            <span class="error"><?php echo $genderErr; ?></span>
+            <div class='form-group'>
+                <label for="state">State:</label>
+                <select name="state" class="custom-select">
+                    <option value="">Select any state</option>
+                    <option value="AndhraPradesh">AndhraPradesh</option>
+                    <option value="Odisha">Odisha</option>
+                    <option value="Gujurat">Gujurat</option>
+                    <option value="MadhyaPradesh">MadhyaPradesh</option>
+                </select>
+            </div>
+            <span class="error"><?php echo $stateErr; ?></span>
+            <div class='form-group'>
+                <label for="skills">Skills:</label>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type='checkbox' name='skill[]' class="custom-control-input" id="c" value='c'>
+                    <label class="custom-control-label" for="c">C</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type='checkbox' name='skill[]' class="custom-control-input" id="java" value='java'>
+                    <label class="custom-control-label" for="java">Java</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type='checkbox' name='skill[]' class="custom-control-input" id="python" value='python'>
+                    <label class="custom-control-label" for="python">Python</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type='checkbox' name='skill[]' class="custom-control-input" id="web_development" value='web development'>
+                    <label class="custom-control-label" for="web_development">Web Development</label>
+                    <span class="error"><?php echo $skillErr; ?></span>
+                </div>
+            </div>
+            <div class="custom-file button container-fluid">
+                <input type="file" class="custom-file-input" id="profilephoto" name='profilePhoto'>
+                <label class="custom-file-label" for="profilephoto">Choose profile photo</label>
+                <span class="error"><?php echo $profilePhotoErr; ?></span>
+            </div>
+            <div class="custom-file button container-fluid">
+                <input type="file" class="custom-file-input" name='resume' id="resume">
+                <label class="custom-file-label" for="resume">Choose resume</label>
+                <span class="error"><?php echo $resumeErr; ?></span>
+            </div>
+            <div class='button'>
+                <input type="submit" class="btn btn-block btn-primary" name="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+    <div class="container-fluid">
 
-        State:
-        <select name="state">
-            <option value="">Select any state</option>
-            <option value="AndhraPradesh">AndhraPradesh</option>
-            <option value="Odisha">Odisha</option>
-            <option value="Gujurat">Gujurat</option>
-            <option value="MadhyaPradesh">MadhyaPradesh</option>
-        </select>
-        <span class="error">* <?php echo $stateErr; ?></span>
-        <br /><br />
-        Skills:
-        <input type='checkbox' name='skill[]' value='c'>C
-        <input type='checkbox' name='skill[]' value='java'>java
-        <input type='checkbox' name='skill[]' value='python'>python
-        <input type='checkbox' name='skill[]' value='web development'>web development
-        <span class="error">* <?php echo $skillErr; ?></span>
-        <br /><br />
-        Select your profile photo:
-        <input type='file' name='profilePhoto'><span class="error">* <?php echo $profilePhotoErr; ?></span>
-        <br /><br />
-        Select your resume:
-        <input type='file' name='resume'><span class="error">* <?php echo $resumeErr; ?></span>
-        <br /><br />
-        <input type="submit" name="submit" value="Submit">
-    </form>
-    <div>
+    </div>
+    <div id="result">
         <?php
         if ($_POST['submit'] != "") {
 
@@ -189,6 +233,11 @@ if (isset($_SESSION["name"]) and isset($_SESSION["password"])) {
 
 
     </div>
+    </div>
+
 </body>
+<div id=container-fluid>
+    <?php require_once('footer.php') ?>
+</div>
 
 </html>

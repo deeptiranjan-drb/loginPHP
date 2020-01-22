@@ -7,54 +7,13 @@ session_start();
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width">
    <meta name='author' content='Deeptiranjan'>
-   <title>LOG IN</title>
-   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+   <title>LogIn Page</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" />
    <link rel="stylesheet" type="text/css" href="login_style.css?v=1">
-
-</head>
-
-<body>
-
-   <div class="container">
-      <div class="row">
-         <div class="col-md-4 col-md-offset-4">
-            <div class="panel panel-primary">
-               <div class="panel-heading">
-                  <h3 class="panel-title">Please sign in</h3>
-               </div>
-               <div class="panel-body">
-                  <form accept-charset="UTF-8" role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                     <fieldset>
-                        <div class="form-group">
-                           <input class="form-control" placeholder="<?php if ($nameErr == "") {
-                                                                        echo "User name";
-                                                                     } else {
-                                                                        echo $nameErr;
-                                                                     } ?>" name="name" type="text">
-                        </div>
-                        <div class="form-group">
-                           <input class="form-control" placeholder="<?php if ($paswordErr == "") {
-                                                                        echo "password";
-                                                                     } else {
-                                                                        echo $passwordErr;
-                                                                     } ?>" name="password" type="password" value="">
-                        </div>
-                        <!-- <div class="checkbox">
-                           <label>
-                              <input name="remember" type="checkbox" value="Remember Me"> Remember Me
-                           </label>
-                        </div> -->
-                        <input class="btn btn-lg btn-primary btn-square" type="submit" value="Login">
-                     </fieldset>
-                  </form>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-
-
    <?php
    $name = $password = "";
    $nameErr = "";
@@ -74,6 +33,55 @@ session_start();
       $nameErr = "Please enter valid username";
    }
    ?>
+</head>
+
+<body>
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12  d-flex flex-column justify-content-center">
+            <div class="row">
+               <div class="col-lg-6 col-md-8 mx-auto">
+
+                  <!-- form card login -->
+                  <div class="card rounded shadow shadow-sm">
+                     <div class="card-header">
+                        <h3 class="mb-0">Login</h3>
+                     </div>
+                     <div class="card-body">
+                        <form class="form" role="form" autocomplete="off" id="formLogin" method="POST">
+                           <div class="form-group">
+                              <label for="uname1">Username</label>
+                              <input type="text" class="form-control form-control-lg rounded-0" name="name" id="uname1" value="<?php echo $name ?>">
+                              <span><?php echo $nameErr; ?></span>
+                           </div>
+                           <div class="form-group">
+                              <label>Password</label>
+                              <input type="password" name="password" class="form-control form-control-lg rounded-0" id="pwd1">
+                              <span><?php echo $passwordErr; ?></span>
+                           </div>
+
+                           <button type="submit" class="btn btn-success btn-block btn-lg float-right" id="btnLogin">Login</button>
+                        </form>
+                     </div>
+                     <!--/card-block-->
+                  </div>
+                  <!-- /form card login -->
+
+               </div>
+
+
+            </div>
+            <!--/row-->
+
+         </div>
+         <!--/col-->
+      </div>
+      <!--/row-->
+   </div>
+   <!--/container-->
+
+
+
 </body>
 
 </html>
