@@ -5,7 +5,7 @@ session_start();
 
 <head>
    <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width">
+   <meta name="viewport" content="width=device-width,initial-scale=1">
    <meta name='author' content='Deeptiranjan'>
    <title>LogIn Page</title>
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -15,6 +15,7 @@ session_start();
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" />
    <link rel="stylesheet" type="text/css" href="login_style.css?v=1">
    <link rel="stylesheet" type="text/css" href="profile_style.css?v=1">
+   <link rel="stylesheet" type="text/css" href="footer_style.css">
    <?php
    $name = $password = "";
    $nameErr = $passwordErr = "";
@@ -38,7 +39,7 @@ session_start();
    ?>
 </head>
 
-<body>
+<body class='bg-light'>
    <div class="container">
       <div class="row">
          <div class="col-md-12  d-flex flex-column justify-content-center">
@@ -47,8 +48,8 @@ session_start();
 
                   <!-- form card login -->
                   <div class="card rounded shadow shadow-sm">
-                     <div class="card-header">
-                        <h3 class="mb-0">Login</h3>
+                     <div class="card-header bg-dark">
+                        <h3 class="mb-0 text-white">Login</h3>
                      </div>
                      <div class="card-body">
                         <form class="form" role="form" autocomplete="off" id="formLogin" method="POST">
@@ -83,7 +84,7 @@ session_start();
    </div>
    <!--/container-->
 
-
+   <?php require_once("footer.php"); ?>
 
 </body>
 

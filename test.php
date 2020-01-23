@@ -1,35 +1,34 @@
 <?php
+// $servername = "localhost";
+// $username = "root";
+// $password = "780952@Drb";
+// $database = "Test";
 
+// $conn = new mysqli($servername, $username, $password, $database);
 
+// if ($conn->connect_error) {
+//     die("Connection failed:" . $conn->connect_error);
+// } else {
+//     echo "Connected successfully";
+// }
+// $sql = "INSERT INTO Users( Prefix,LastName,FirstName,Email,Age,State,Gender) VALUES(1,'Das','Akash','akdash@gmail.com',22,'odisha','male')";
+// if ($conn->query($sql) == TRUE) {
+//     echo "New record created successfully";
+// } else {
+//     echo "Error:" . $sql . "<br />" . $conn->eror;
+// }
+class Singleton
+{
+	private static $instance = null;
 
-
-                                if ($emailErr == "") {
-                                    echo "<p>Email: " . $email . "</p>";
-                                }
-                                if ($mobErr == "") {
-                                    echo "<p>Mobile no: " . $mob . "</p>";
-                                }
-                                if ($ageErr == "") {
-                                    echo "<p>Age: " . $age . "</p>";
-                                }
-                                if ($genderErr == "") {
-                                    echo "<p>Gender: " . $gender . "</p>";
-                                }
-                                if ($stateErr == "") {
-                                    echo "<p>State: " . $state . "</p>";
-                                }
-                                if ($skillErr == "") {
-                                    echo "<p>Skills:" . implode(', ', $skill) . "</p>";
-                                }
-                                if ($profilePhotoErr == '') {
-                                    foreach ($_FILES["profilePhoto"] as $k => $v) {
-                                        echo $k . "=>" . $v . '<br />';
-                                    }
-                                }
-                                if ($resumeErr == '') {
-                                    foreach ($_FILES["resume"] as $k => $v) {
-                                        echo $k . "=>" . $v . '<br />';
-                                    }
-                                }
-                            }
-                                ?> -->
+	private function __construct()
+	{
+	}
+	public static function getInstance()
+	{
+		if (self::$instance == null) {
+			self::$instance = new Singleton();
+		}
+		return self::$instance;
+	}
+}
